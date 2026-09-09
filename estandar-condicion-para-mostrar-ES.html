@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El Estándar de Condición para Mostrar | Verandah Properties</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--teal:#008C82;--teal-deep:#00625B;--gold:#C9A227;--charcoal:#1A1A1A;
+--body:#1F1F1F;--muted:#5A5651;--strong:#0F0F0F;--line:#E2DED7;--paper:#FBFAF7;--panel:#F3F1EC}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--paper);color:var(--body);font-family:'Jost',system-ui,sans-serif;
+font-weight:400;font-size:16.5px;line-height:1.65}
+.wrap{max-width:900px;margin:0 auto;padding:0 26px}
+h1,h2,h3,h4{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;color:var(--charcoal)}
+h1{font-size:2.6rem;line-height:1.13;margin:0 0 .5rem}
+h2{font-size:1.95rem;line-height:1.2;margin:0 0 .8rem}
+h3{font-size:1.3rem;margin:0 0 .5rem}
+h4{font-size:1.05rem;margin:0 0 .35rem;color:var(--teal-deep)}
+p{margin:0 0 .95rem;max-width:74ch}
+b,strong{font-weight:600;color:var(--strong)}
+a{color:var(--teal-deep)}
+ul{margin:0 0 .95rem;padding-left:1.2rem;max-width:74ch}
+li{margin-bottom:.45rem}
+
+.mast{background:var(--charcoal);color:#F5F3EE;padding:30px 0 30px}
+.brandline{display:flex;align-items:baseline;gap:13px;flex-wrap:wrap}
+.mark{width:33px;height:33px;border-radius:50%;background:var(--teal);color:#fff;
+font-family:'Cormorant Garamond',serif;font-size:21px;display:inline-flex;
+align-items:center;justify-content:center;flex:0 0 auto;transform:translateY(5px)}
+.brandname{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:#F5F3EE}
+.mast .tag{color:#A9A49C;font-size:.83rem;margin-left:auto}
+.mast h1{color:#FBFAF7;margin-top:22px}
+.mast h1 em{font-style:italic;font-weight:400;color:var(--gold)}
+.mast .sub{color:#B8B2A8;margin:0;max-width:70ch}
+
+section{padding:40px 0;border-top:1px solid var(--line)}
+section:first-of-type{border-top:none}
+h2 em{font-style:italic;font-weight:400;color:var(--teal-deep)}
+
+.reasons{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px;margin:0 0 22px}
+.rz{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px}
+.rz .n{font-family:'Cormorant Garamond',serif;font-size:1.5rem;color:var(--gold);line-height:1;margin-bottom:8px}
+.rz h4{font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--charcoal);margin-bottom:6px}
+.rz p{font-size:.93rem;margin-bottom:0}
+
+.quote{border-left:4px solid var(--gold);background:#fff;padding:22px 26px;
+border-radius:0 8px 8px 0;margin:0 0 22px}
+.quote p{font-family:'Cormorant Garamond',serif;font-size:1.22rem;line-height:1.5;margin-bottom:.5rem}
+.quote .who{font-size:.87rem;color:var(--muted);font-family:'Jost',sans-serif}
+
+.block{background:#fff;border:1px solid var(--line);border-radius:10px;padding:24px 26px;margin:0 0 20px}
+.block > h3{display:flex;align-items:baseline;gap:12px;margin-bottom:4px}
+.badge{display:inline-block;background:#FBF3D8;color:#7A5F06;font-family:'Jost',sans-serif;
+font-size:.74rem;font-weight:600;padding:3px 10px;border-radius:20px;vertical-align:middle}
+.grp{margin-top:20px;padding-top:18px;border-top:1px solid var(--line)}
+.grp:first-of-type{border-top:none;padding-top:6px}
+.grp ul{margin-bottom:0}
+
+.cmp{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin:0 0 20px}
+.cbox{border-radius:10px;padding:20px 22px;border:1px solid var(--line);background:#fff}
+.cbox.bad{border-top:4px solid #C0705A}
+.cbox.good{border-top:4px solid var(--teal)}
+.cbox h4{font-family:'Cormorant Garamond',serif;font-size:1.15rem;color:var(--charcoal);margin-bottom:10px}
+.cbox ul{padding-left:1.1rem;margin-bottom:0;font-size:.93rem}
+
+.alert{border-left:4px solid var(--gold);background:#fff;padding:18px 22px;
+border-radius:0 8px 8px 0;margin:0 0 20px}
+.alert p:last-child{margin-bottom:0}
+.alert h3{margin-top:0;font-size:1.15rem}
+
+footer{background:var(--charcoal);color:#B8B2A8;padding:32px 0;font-size:.89rem}
+footer .sig{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--gold);margin-bottom:8px}
+footer a{color:#8FD2CB}
+
+@media(max-width:720px){
+body{font-size:16px}h1{font-size:2rem}h2{font-size:1.55rem}
+.cmp{grid-template-columns:1fr}
+.mast .tag{margin-left:0;width:100%}
+}
+@media print{body{background:#fff}section{page-break-inside:avoid}}
+</style>
+</head>
+<body>
+
+<header class="mast">
+  <div class="wrap">
+    <div class="brandline">
+      <span class="mark">V</span>
+      <span class="brandname">Verandah Properties, LLC</span>
+      <span class="tag">Educación para propietarios · Lake Nona y St. Cloud</span>
+    </div>
+    <h1>El estándar de condición para mostrar.<br><em>Por qué lo cambia todo.</em></h1>
+    <p class="sub">Antes de que un solo inquilino cruce su puerta, antes de que se tome una sola fotografía, antes de un solo día de mercadeo, su propiedad debe estar lista para mostrar. Esto no es una preferencia. Es la base de todo buen resultado que entregamos.</p>
+  </div>
+</header>
+
+<div class="wrap">
+
+<section>
+  <p>Verandah Properties administra un <b>portafolio curado</b> de propiedades de renta en el corredor de Lake Nona y St. Cloud. Cada propiedad que representamos lleva nuestro nombre, y nuestro nombre representa un estándar. Estar lista para mostrar no es el último paso antes de publicar. <b>Es el primer paso hacia el resultado que usted merece.</b></p>
+</section>
+
+<section>
+  <h2>Por qué este es el paso <em>más importante de todos</em></h2>
+  <p>El mercado de renta es una experiencia visual, emocional y competitiva para los inquilinos. Los mejores solicitantes — los que tienen buen crédito, ingresos estables, excelente historial de renta y respeto genuino por una casa — tienen opciones. Están comparando su propiedad con otras. Deciden rápido. Y la condición de una propiedad al momento de mostrarla es el factor más poderoso para determinar si aplican o si siguen de largo.</p>
+  <div class="reasons">
+    <div class="rz">
+      <div class="n">01</div>
+      <h4>La primera impresión es permanente, y ocurre en línea</h4>
+      <p>Antes de que un inquilino pise su propiedad, ya la juzgó. Las fotos profesionales de una propiedad lista para mostrar crean la conexión emocional que genera solicitudes. Las fotos de una propiedad sin preparar generan que sigan deslizando.</p>
+    </div>
+    <div class="rz">
+      <div class="n">02</div>
+      <h4>Los inquilinos calificados se autoseleccionan por lo que ven</h4>
+      <p>Una casa bien presentada atrae solicitantes que se enorgullecen de dónde viven. Una casa descuidada o sin preparar atrae solicitantes que o no lo notan o no les importa, y ninguno de los dos es el inquilino que usted quiere.</p>
+    </div>
+    <div class="rz">
+      <div class="n">03</div>
+      <h4>La condición de la propiedad comunica sus estándares</h4>
+      <p>Cuando usted presenta una casa con cuidado y atención al detalle, le está diciendo a cada posible inquilino: así se mantiene esta casa. Esa señal atrae inquilinos que la mantendrán de la misma manera.</p>
+    </div>
+  </div>
+
+  <div class="quote">
+    <p>"Se puede rentar una propiedad que no esté completamente lista para mostrar. Pero le podemos asegurar que no será a un inquilino altamente calificado. El estándar de lo que usted presenta es el estándar de quién aplica. Siempre, sin excepción. Esto lo dicen más de 20 años de reconocimiento de patrones."</p>
+    <div class="who">El principio Verandah</div>
+  </div>
+</section>
+
+<section>
+  <h2>Qué significa realmente estar lista para mostrar</h2>
+  <p>Significa que un posible inquilino puede recorrer su propiedad y realmente imaginarse mudándose <b>ese mismo día.</b> No el mes que viene, después de que se haga un trabajo. No después de que se laven las alfombras. Ese día. Cada detalle comunica algo, y los detalles que le pedimos atender no son arbitrarios. Cada uno impacta directamente en la calidad del inquilino que aplica.</p>
+
+  <div class="block">
+    <h3>Interior — cada cuarto, cada detalle <span class="badge">NO NEGOCIABLE</span></h3>
+
+    <div class="grp">
+      <h4>Limpieza</h4>
+      <ul>
+        <li><b>Limpieza profunda profesional en toda la casa</b> — no un orden general, sino una limpieza profesional a fondo. Cada superficie, cada rincón, cada electrodoméstico por dentro y por fuera.</li>
+        <li>Todos los artículos y pertenencias personales retirados por completo de la casa y del garaje</li>
+        <li>Paredes, puertas y zoclos limpios — poner atención a apagadores, pasillos y marcos de puertas</li>
+        <li>Ventiladores de techo y luminarias limpios — el polvo acumulado se nota de inmediato en las fotos</li>
+        <li>Ventanas, alféizares y persianas limpios — mosquiteros asegurados y en buen estado</li>
+        <li>Baños limpios y desinfectados a nivel de hotel</li>
+        <li>Filtro de aire acondicionado nuevo — un detalle pequeño que comunica mantenimiento atento</li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <h4>Pisos</h4>
+      <ul>
+        <li><b>Alfombra lavada profesionalmente</b> si está en buen estado, o reemplazada si está desgastada, manchada o tiene más de unos pocos años</li>
+        <li>Todo el piso de loseta y vinil trapeado y libre de manchas y marcas</li>
+        <li>Pisos duros con desgaste mínimo, sin rayaduras excesivas</li>
+        <li>Piso de madera con juntas limpias y sin hendiduras profundas ni daños</li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <h4>Pintura y paredes</h4>
+      <ul>
+        <li><b>Pintura fresca en tonos neutros en toda la casa</b> — los colores fuertes o personales limitan la capacidad del inquilino de imaginarse en el espacio</li>
+        <li>Sin raspones, marcas, agujeros de clavos ni parches visibles de retoque</li>
+        <li>Acabado uniforme — sin diferencias de brillo entre paredes y molduras</li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <h4>Cocina y baños</h4>
+      <ul>
+        <li><b>Cocina y baños actualizados en los últimos 5 años</b> — o con accesorios y acabados que se vean actuales y bien mantenidos</li>
+        <li>Todos los electrodomésticos limpios, funcionando y del mismo color, o en acero inoxidable</li>
+        <li>Sin llaves goteando, sin inodoros corriendo, sin herrajes rotos de ningún tipo</li>
+        <li>Luminarias y llaves actualizadas — el latón anticuado o los herrajes básicos de constructora se leen como descuido para un inquilino calificado</li>
+        <li>Juntas de loseta limpias — las juntas manchadas o agrietadas son una de las razones más comunes por las que un inquilino descarta una propiedad</li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <h4>Funcionamiento general</h4>
+      <ul>
+        <li>Todos los accesorios, puertas, cerraduras y ventanas funcionando como deben — sin puertas atoradas, cerraduras rotas ni ventanas trabadas</li>
+        <li>Todos los focos funcionando, cada uno. Un cuarto oscuro durante una visita se lee como un problema</li>
+        <li>Persianas instaladas, limpias y completamente funcionales en toda la casa</li>
+        <li>Todos los daños visibles reparados o reemplazados — durante nuestro recorrido evaluamos qué es lo que más importa</li>
+        <li>Garaje limpio y libre de artículos personales — el espacio de garaje es un punto de venta importante y debe verse como tal</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="block">
+    <h3>Exterior — lo primero que ven <span class="badge">NO NEGOCIABLE</span></h3>
+
+    <div class="grp">
+      <h4>Césped y jardinería</h4>
+      <ul>
+        <li><b>Césped podado, recortado y con bordes definidos</b> — una línea de césped limpia comunica que esta propiedad se cuida</li>
+        <li>Riego programado en automático — el césped debe mantenerse activamente, no solo cortarse una vez</li>
+        <li>Jardineras desmalezadas y con mulch fresco donde corresponda</li>
+        <li>Plantas muertas o sobrecrecidas retiradas o reemplazadas — un jardín descuidado es la primera impresión y marca el tono de todo lo que sigue</li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <h4>Superficies exteriores</h4>
+      <ul>
+        <li><b>Lavado a presión de todas las superficies exteriores</b> si hace falta — en Florida el moho y el sarro se acumulan rápido y se notan mucho en las fotos</li>
+        <li>Entrada de auto y andadores limpios y libres de manchas de aceite o basura</li>
+        <li>Reparar o reemplazar mosquiteros dañados o faltantes, en ventanas, porches o cerramientos de alberca</li>
+        <li>Revisar y reparar cualquier riesgo de tropiezo en andadores o accesos</li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <h4>Alberca y patio</h4>
+      <ul>
+        <li><b>Alberca limpia, balanceada y azul</b> — una alberca verde acaba con el trato. Punto.</li>
+        <li>Todos los muebles de patio y exteriores retirados o acomodados con orden — sin artículos personales, sin desorden</li>
+        <li>Cerramiento de malla limpio y sin roturas ni daños</li>
+        <li>Todos los artículos personales y basura del exterior retirados por completo de la propiedad</li>
+      </ul>
+    </div>
+
+    <div class="grp">
+      <h4>Detalles de la entrega final</h4>
+      <ul>
+        <li>Todos los manuales, llaves adicionales (etiquetadas), tarjetas de acceso, llaves de alberca, tarjetas de amenidades y controles remotos dejados sobre la barra de la cocina para Verandah</li>
+        <li><b>Entregar todas las llaves necesarias para entrar a la propiedad</b> — incluidas tarjetas de acceso a la comunidad, controles de garaje, llaves del buzón y llaves de amenidades</li>
+        <li>Todos los servicios activos a nombre del propietario mientras la propiedad esté vacía — la electricidad y el agua deben estar encendidas para poder mostrarla</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>La consecuencia de <em>no estar lista</em></h2>
+  <p>Esto no se trata de perfeccionismo. Se trata de resultados. Esto es lo que los datos y la experiencia nos dicen que pasa cuando una propiedad se publica antes de estar realmente lista, frente a lo que pasa cuando sí lo está.</p>
+  <div class="cmp">
+    <div class="cbox bad">
+      <h4>Sin estar lista — qué ocurre</h4>
+      <ul>
+        <li>Los inquilinos calificados la ven y siguen de largo, hacia una opción mejor presentada</li>
+        <li>Más días en el mercado — el algoritmo de Zillow desprioriza las publicaciones que llevan tiempo sin moverse</li>
+        <li>Se vuelven necesarias reducciones de precio para atraer solicitantes que pasen por alto la condición</li>
+        <li>Un grupo de solicitantes de menor calidad: quienes tienen menos opciones aceptan lo que los inquilinos calificados rechazan</li>
+        <li>Mayor riesgo de problemas de mantenimiento, disputas de contrato y arrendamientos difíciles</li>
+        <li>Su inversión no queda protegida, queda expuesta</li>
+      </ul>
+    </div>
+    <div class="cbox good">
+      <h4>Lista para mostrar — qué ocurre</h4>
+      <ul>
+        <li>Un grupo sólido de solicitantes calificados desde el primer día — los primeros 7 a 10 días generan el mejor tráfico</li>
+        <li>Se renta más rápido — una propiedad lista se renta de 2 a 3 veces más rápido que una sin preparar</li>
+        <li>Se logra la renta completa solicitada — los inquilinos calificados pagan el precio; los desesperados negocian</li>
+        <li>Un inquilino de mejor calibre, que mantiene la propiedad al nivel en que se le presentó</li>
+        <li>Menos llamadas de mantenimiento e incidentes durante el arrendamiento</li>
+        <li>Su inversión queda activamente protegida, desde el primer día</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="alert">
+    <h3>El costo de los días vacíos</h3>
+    <p>Cada día que una propiedad está vacía porque no estaba lista para mostrarse es un día de ingreso por renta que no se recupera. En una propiedad de $2,500 al mes, cada día de vacancia innecesaria cuesta aproximadamente <b>$83</b>. Preparar la propiedad correctamente antes de publicarla casi siempre resulta el camino más rápido y más sensato financieramente, no el más lento.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Su responsabilidad. <em>Nuestro apoyo.</em></h2>
+  <p>El estándar de condición para mostrar es responsabilidad del propietario, y somos claros al respecto desde el inicio. Usted conoce su propiedad, tiene acceso a ella y está en la mejor posición para prepararla. Lo que nosotros aportamos es orientación, claridad y una red de proveedores de confianza si la necesita.</p>
+  <p>Si necesita ayuda para encontrar proveedores confiables — limpieza, pintura, especialistas en pisos, jardineros, personal de mantenimiento — con gusto lo conectamos con los profesionales de nuestra red que conocen nuestro estándar. No administramos el trabajo en su nombre durante la fase de preparación, pero nos aseguramos de que nunca se quede solo tratando de resolverlo.</p>
+
+  <div class="block">
+    <h3>Cómo funciona la confirmación</h3>
+    <p>Una vez que usted considere que la propiedad está lista, nuestra New Client Liaison la visitará en persona para confirmar que cumple con nuestro estándar, antes de ordenar la fotografía y publicar el anuncio. Si todo está en orden, avanzamos de inmediato. Si queda algo menor pendiente — una limpieza final, lavado de alfombra, un pequeño retoque — nos encargamos de ello en su nombre antes de la mudanza, para que la propiedad se presente en su mejor estado. La meta siempre es una transición fluida y rápida de lista a rentada.</p>
+  </div>
+</section>
+
+<section>
+  <h2>Nuestra marca. Nuestro estándar. <em>Su resultado.</em></h2>
+  <p>Cada propiedad del portafolio de Verandah está aquí porque cumple con un estándar, y ese estándar es lo que nos permite atraer y colocar al calibre de inquilino que protege su inversión y entrega los resultados que usted espera. El estándar de condición para mostrar no es la vara que ponemos por ser difíciles. Es la vara que ponemos porque funciona. Veinte años de datos, miles de colocaciones y una trayectoria construida enteramente en este corredor nos lo dicen.</p>
+
+  <div class="quote">
+    <p>"El estándar de condición para mostrar no se trata de estética. Se trata de resultados. El inquilino que entra a una casa bellamente presentada y dice 'me veo viviendo aquí' — ese es el inquilino que aplica, califica, firma, paga a tiempo y cuida su propiedad. Ese es el inquilino que estamos trabajando por encontrarle. Estar lista para mostrar es como empezamos ese proceso con el pie derecho, y en más de 20 años nunca nos ha fallado."</p>
+    <div class="who">Pamela Syvertson — Propietaria y Broker, Verandah Properties</div>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  <div class="wrap">
+    <div class="sig">Curating Lake Nona's Finest Rental Portfolio</div>
+    <p><b>Verandah Properties, LLC</b><br>
+    Pamela Syvertson · Propietaria y Broker<br>
+    <a href="tel:4074155478">(407) 415-5478</a> · <a href="mailto:pamela@verandahproperties.com">pamela@verandahproperties.com</a> · <a href="https://www.verandahproperties.com">verandahproperties.com</a></p>
+  </div>
+</footer>
+
+</body>
+</html>
